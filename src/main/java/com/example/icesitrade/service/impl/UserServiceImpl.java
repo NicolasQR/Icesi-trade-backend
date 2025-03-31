@@ -16,8 +16,12 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     @Override
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public User saveUser(User user) {
+        // Si el user no tiene un rol, podrías lanzar una excepción aquí
+        if (user.getRole() == null) {
+            throw new IllegalArgumentException("User must have a role assigned");
+        }
+        return userRepository.save(user);
     }
 
     @Override
@@ -26,19 +30,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User createUser(User user) {
-        return userRepository.save(user);
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 
     @Override
-    public User updateUser(Long id, User updatedUser) {
-        return userRepository.findById(id).map(existing -> {
-            existing.setName(updatedUser.getName());
-            existing.setEmail(updatedUser.getEmail());
-            existing.setPassword(updatedUser.getPassword());
-            existing.setRole(updatedUser.getRole());
-            return userRepository.save(existing);
-        }).orElse(null);
+    public User updateUser(Long id, User user) {
+        return userRepository.findById(id)
+                .map(existing -> {
+                    existing.setName(user.getName());
+                    existing.setEmail(user.getEmail());
+                    existing.setPassword(user.getPassword());
+                    existing.setRole(user.getRole());
+                    return userRepository.save(existing);
+                })
+                .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
     @Override
