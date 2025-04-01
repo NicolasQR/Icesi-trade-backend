@@ -7,4 +7,7 @@ public interface MessageService {
     Message sendMessage(Message message);
     List<Message> getMessagesBetweenUsers(Long user1Id, Long user2Id);
     List<Message> getAllMessages();
+    List<Message> getReceivedMessages(Long userId);
+    List<Message> getSentMessages(Long userId);
+
 }

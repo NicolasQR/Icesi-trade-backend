@@ -7,6 +7,7 @@ import com.example.icesitrade.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -26,8 +27,14 @@ public class UserServiceTest {
 
     @Test
     void testCreateUser() {
-        User user = new User(null, "Nico", "nico@example.com", "1234", new Role(1L, "USER"));
-        User savedUser = new User(1L, "Nico", "nico@example.com", "1234", new Role(1L, "USER"));
+        Role role = Role.builder()
+                .id(1L)
+                .name("USER")
+                .permissions(Collections.emptySet())
+                .build();
+
+        User user = new User(null, "Nico", "nico@example.com", "1234", role);
+        User savedUser = new User(1L, "Nico", "nico@example.com", "1234", role);
 
         when(userRepository.save(user)).thenReturn(savedUser);
 
@@ -38,7 +45,13 @@ public class UserServiceTest {
 
     @Test
     void testFindUserById() {
-        User user = new User(1L, "Nico", "nico@example.com", "1234", new Role(1L, "USER"));
+        Role role = Role.builder()
+                .id(1L)
+                .name("USER")
+                .permissions(Collections.emptySet())
+                .build();
+
+        User user = new User(1L, "Nico", "nico@example.com", "1234", role);
         when(userRepository.findById(1L)).thenReturn(Optional.of(user));
 
         Optional<User> result = userService.getUserById(1L);
