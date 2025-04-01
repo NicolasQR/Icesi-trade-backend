@@ -45,7 +45,7 @@ This project was developed as part of a university assignment, focusing on solid
 
 1. Clone the repository:
    ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/NicolasQR/Icesi-trade-backend.git
    ```
 
 2. Navigate to the project directory:
