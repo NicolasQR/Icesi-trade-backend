@@ -22,7 +22,7 @@ public class Product {
 
     private double price;
 
-    private String status; // e.g., "Available", "Sold"
+    private String status;
 
     private String location;
 

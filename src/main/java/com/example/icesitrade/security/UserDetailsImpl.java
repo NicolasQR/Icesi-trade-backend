@@ -31,26 +31,26 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public String getUsername() {
-        return user.getEmail(); // Spring usa el "username", que en nuestro caso es el email
+        return user.getEmail();
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return true; // Cambia esto si piensas implementar lógica de expiración
+        return true; // Cambiar para implementar lógica de expiración
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return true; // Cambia esto si piensas implementar bloqueo de cuenta
+        return true; // Cambiar para implementar bloqueo de cuenta
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true; // Cambia esto si piensas implementar expiración de credenciales
+        return true; // Cambiar para implementar expiración de credenciales
     }
 
     @Override
     public boolean isEnabled() {
-        return true; // Cambia esto si tienes usuarios deshabilitados
+        return true; // Cambiar para usuarios deshabilitados
     }
 }

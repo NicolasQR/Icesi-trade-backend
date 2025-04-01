@@ -17,7 +17,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User saveUser(User user) {
-        // Si el user no tiene un rol, podrías lanzar una excepción aquí
         if (user.getRole() == null) {
             throw new IllegalArgumentException("User must have a role assigned");
         }

@@ -18,11 +18,13 @@ public class ProductServiceImplTest {
 
     private ProductRepository productRepository;
     private ProductService productService;
+    private HistoryService historyService;
 
     @BeforeEach
     void setUp() {
         productRepository = mock(ProductRepository.class);
-        productService = new ProductServiceImpl(productRepository);
+        historyService = mock(HistoryService.class);
+        productService = new ProductServiceImpl(productRepository, historyService);
     }
 
     @Test

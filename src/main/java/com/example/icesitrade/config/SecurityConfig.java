@@ -3,6 +3,7 @@ package com.example.icesitrade.config;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -25,7 +26,6 @@ public class SecurityConfig {
         http
                 .csrf().disable()
                 .authorizeHttpRequests(auth -> auth
-                        // Reglas usando los permisos reales del enum:
                         .requestMatchers("/api/users/**").hasAuthority("READ_USERS")
                         .requestMatchers("/api/roles/**").hasAuthority("MANAGE_ROLES")
                         .requestMatchers("/api/permissions/**").hasAuthority("MANAGE_ROLES")
@@ -34,6 +34,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/messages/**").authenticated()
                         .requestMatchers("/api/ratings/**").authenticated()
                         .requestMatchers("/api/categories/**").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/api/products/**").hasAuthority("product:update")
                         .anyRequest().permitAll()
                 )
                 .httpBasic(); // Para pruebas rápidas con Postman
